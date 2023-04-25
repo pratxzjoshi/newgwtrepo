@@ -14,6 +14,12 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-    - name: Get File
-      run: |
-        curl https://github.com/pratxzjoshi/newgwtrepo/tree/main/.github --output file.txt
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+       java-version: 11
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Running mvn application
+      run: java target/helloworld-1.0-.jar com.myfile.java
+        
