@@ -1,39 +1,34 @@
-package com.test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
- 
+@SpringBootTest
+class GitHubAPITest {
 
-import junit.framework.Test;
-import junit.framework.TestCase;
+    private final String API_URL = "newgwtrepo/.github/workflows/newget.yml";
 
+    @Test
+    void testGetRepo() {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "My Java HTTP Client");
+        HttpEntity<String> entity = new HttpEntity<>(headers);
 
- 
+        String owner = "octocat";
+        String repo = "Hello-World";
+        String endpoint = String.format("%s/repos/%s/%s", API_URL, owner, repo);
 
-/**
-* Unit test for simple App.
-*/
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+        ResponseEntity<String> response = restTemplate.exchange(
+                endpoint,
+                HttpMethod.GET,
+                entity,
+                String.class);
 
- 
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
- 
-
-   
+        assert(response.getStatusCode().is2xxSuccessful());
+       
+    }
+}
