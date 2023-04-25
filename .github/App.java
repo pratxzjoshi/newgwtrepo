@@ -20,7 +20,7 @@ class GitHubAPITest {
 
         String owner = "octocat";
         String repo = "Hello-World";
-        String endpoint = String.format("%s/repos/%s/%s", API_URL, owner, repo);
+        String endpoint = String.format("%s/repos/%s/%s", .github/workflows/newget.yml, pratxzjoshi, newgwtrepo);
 
         ResponseEntity<String> response = restTemplate.exchange(
                 endpoint,
