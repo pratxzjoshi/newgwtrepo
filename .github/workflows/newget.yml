@@ -1,4 +1,4 @@
-name: newgetmethod
+name: implementnewgetmethod
 
 on:
   push:
